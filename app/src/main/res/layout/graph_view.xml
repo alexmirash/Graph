@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.alex.mirash.graph.MainActivity"
+    >
+    <HorizontalScrollView
+        android:id="@+id/graph_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <com.alex.mirash.graph.graph.view.GraphContentView
+            android:id="@+id/graph_content_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            />
+    </HorizontalScrollView>
+</FrameLayout>
