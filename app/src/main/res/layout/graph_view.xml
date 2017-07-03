@@ -6,15 +6,29 @@
     android:layout_height="match_parent"
     tools:context="com.alex.mirash.graph.MainActivity"
     >
+    <com.alex.mirash.graph.graph.view.GraphValueAxisView
+        android:id="@+id/graph_value_axis"
+        android:layout_width="@dimen/graph_value_axis_width"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/graph_time_axis_height"
+        >
+    </com.alex.mirash.graph.graph.view.GraphValueAxisView>
     <HorizontalScrollView
         android:id="@+id/graph_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/graph_value_axis_width"
         >
-        <com.alex.mirash.graph.graph.view.GraphContentView
-            android:id="@+id/graph_content_view"
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            />
+            >
+            <com.alex.mirash.graph.graph.view.GraphContentView
+                android:id="@+id/graph_content_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/graph_time_axis_height"
+                />
+        </FrameLayout>
     </HorizontalScrollView>
 </FrameLayout>

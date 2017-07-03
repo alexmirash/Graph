@@ -80,8 +80,8 @@ public class GraphContentView extends BaseGraphView {
     }
 
     private void addPoint(ValueModel valueModel) {
-        float x = timeToPosition(valueModel.getTime());
-        float y = valueToYPosition(valueModel.getValue());
+        float x = timeToPosition(graphData, valueModel.getTime());
+        float y = valueToYPosition(graphData, valueModel.getValue());
 
         Log.d("LOL", "x, y " + x + "; " + y);
 
@@ -92,13 +92,5 @@ public class GraphContentView extends BaseGraphView {
         addView(pointView, lp);
 
         graphData.addPoint(new GraphPoint(x, y));
-    }
-
-    private float valueToYPosition(float value) {
-        return params.getPaddingTop() + params.getValueHeight() * (1 - (value - graphData.getMinValue()) / graphData.getValueInterval());
-    }
-
-    private float timeToPosition(float time) {
-        return params.getPaddingLeft() + (time - graphData.getStartTime()) / (graphData.getTimeInterval()) * params.getValueWidth();
     }
 }

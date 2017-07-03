@@ -7,8 +7,8 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
 import com.alex.mirash.graph.R;
+import com.alex.mirash.graph.graph.control.GraphParams;
 import com.alex.mirash.graph.graph.model.GraphData;
-import com.alex.mirash.graph.graph.tool.GraphParams;
 
 /**
  * @author Mirash
@@ -17,6 +17,7 @@ import com.alex.mirash.graph.graph.tool.GraphParams;
 public class GraphView extends BaseGraphView {
 
     private GraphContentView graphContentView;
+    private GraphValueAxisView valueAxisView;
 
     public GraphView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -30,11 +31,13 @@ public class GraphView extends BaseGraphView {
     protected void init() {
         inflate(getContext(), R.layout.graph_view, this);
         graphContentView = findViewById(R.id.graph_content_view);
+        valueAxisView = findViewById(R.id.graph_value_axis);
     }
 
     @Override
     public void update(GraphData graphData) {
         graphContentView.update(graphData);
+        valueAxisView.update(graphData);
     }
 
     @Override

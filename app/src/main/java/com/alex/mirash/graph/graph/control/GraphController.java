@@ -1,11 +1,12 @@
-package com.alex.mirash.graph;
+package com.alex.mirash.graph.graph.control;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.alex.mirash.graph.GraphApp;
+import com.alex.mirash.graph.PeriodUtils;
 import com.alex.mirash.graph.graph.model.GraphModel;
 import com.alex.mirash.graph.graph.model.ValueModel;
-import com.alex.mirash.graph.graph.tool.GraphParams;
 import com.alex.mirash.graph.graph.tool.GraphUtils;
 import com.alex.mirash.graph.graph.view.GraphView;
 
@@ -18,13 +19,13 @@ import java.util.Calendar;
 public class GraphController {
     private GraphView graphView;
     private GraphModel graphModel;
-    private GraphParams params;
+
+    public static GraphParams params = new GraphParams(GraphApp.getInstance().getResources());
 
     private AsyncTask task;
 
     public GraphController(GraphView graphView) {
         this.graphView = graphView;
-        params = new GraphParams(graphView.getResources());
         graphView.setParams(params);
     }
 

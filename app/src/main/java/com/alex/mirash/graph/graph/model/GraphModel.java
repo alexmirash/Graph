@@ -47,6 +47,4 @@ public class GraphModel extends GraphData {
         setMinValue(minValue);
         setMaxValue(maxValue);
     }
-
-
 }

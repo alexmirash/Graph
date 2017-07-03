@@ -1,4 +1,4 @@
-package com.alex.mirash.graph.graph.tool;
+package com.alex.mirash.graph.graph.control;
 
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -22,7 +22,7 @@ public class GraphParams {
     private float valueWidth;
     private float valueHeight;
 
-    private int yAxesCount;
+    private int valueAxisLabelsCount;
 
     private int pointSize;
 
@@ -37,15 +37,15 @@ public class GraphParams {
         paddingTop = res.getDimension(R.dimen.graph_padding_top);
         paddingBottom = res.getDimension(R.dimen.graph_padding_bottom);
 
-        yAxesCount = 10;
+        valueAxisLabelsCount = 11;
 
         pointLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         pointLinePaint.setStrokeWidth(res.getDimension(R.dimen.graph_line_width));
         pointLinePaint.setColor(res.getColor(R.color.graph_line_color));
 
-        pointLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        pointLinePaint.setStrokeWidth(res.getDimension(R.dimen.graph_line_width));
-        pointLinePaint.setColor(Color.CYAN);
+        goalLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        goalLinePaint.setStrokeWidth(res.getDimension(R.dimen.graph_line_width));
+        goalLinePaint.setColor(Color.CYAN);
     }
 
     public float getPaddingLeft() {
@@ -64,8 +64,8 @@ public class GraphParams {
         return paddingBottom;
     }
 
-    public int getyAxesCount() {
-        return yAxesCount;
+    public int getValueLabelsCount() {
+        return valueAxisLabelsCount;
     }
 
     public int getPointSize() {

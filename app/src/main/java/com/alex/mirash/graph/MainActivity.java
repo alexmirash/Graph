@@ -3,6 +3,7 @@ package com.alex.mirash.graph;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.alex.mirash.graph.graph.control.GraphController;
 import com.alex.mirash.graph.graph.view.GraphView;
 
 public class MainActivity extends AppCompatActivity {
