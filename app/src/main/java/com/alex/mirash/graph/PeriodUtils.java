@@ -68,6 +68,13 @@ public final class PeriodUtils {
         }
     }
 
+    public static void applyEndOfWeek(Calendar calendar) {
+        calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
+        calendar.add(Calendar.DAY_OF_YEAR, 6);
+        applyStartOfDay(calendar);
+        calendar.add(Calendar.MILLISECOND, -1);
+    }
+
     public static class DayLightSavingTimeEvent {
         long time;
         boolean isToSummerTime;

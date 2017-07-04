@@ -41,6 +41,10 @@ public class GraphModel extends GraphData {
     }
 
 
+    public void setGoalValue(Float goalValue) {
+        this.goalValue = goalValue;
+    }
+
     public void addTimeLabel(TimeModel label) {
         timeLabels.add(label);
     }

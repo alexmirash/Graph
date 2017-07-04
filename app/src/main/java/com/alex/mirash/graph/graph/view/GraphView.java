@@ -33,17 +33,21 @@ public class GraphView extends BaseGraphView {
         inflate(getContext(), R.layout.graph_view, this);
         graphContentView = findViewById(R.id.graph_content_view);
         valueAxisView = findViewById(R.id.graph_value_axis);
+        timeAxisView = findViewById(R.id.graph_time_axis);
     }
 
     @Override
     public void update(GraphData graphData) {
         graphContentView.update(graphData);
         valueAxisView.update(graphData);
+        timeAxisView.update(graphData);
     }
 
     @Override
     public void setParams(GraphParams params) {
-        this.params = params;
+        super.setParams(params);
         graphContentView.setParams(params);
+        valueAxisView.setParams(params);
+        timeAxisView.setParams(params);
     }
 }

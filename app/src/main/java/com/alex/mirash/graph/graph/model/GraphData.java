@@ -19,6 +19,8 @@ public class GraphData {
     protected List<GraphPoint> points;
     protected List<TimeModel> timeLabels;
 
+    protected Float goalValue;
+
     public float getMinValue() {
         return minValue;
     }
@@ -61,5 +63,9 @@ public class GraphData {
 
     public List<TimeModel> getTimeLabels() {
         return timeLabels;
+    }
+
+    public Float getGoalValue() {
+        return goalValue;
     }
 }

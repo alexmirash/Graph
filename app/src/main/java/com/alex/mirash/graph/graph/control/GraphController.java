@@ -1,11 +1,11 @@
 package com.alex.mirash.graph.graph.control;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.alex.mirash.graph.GraphApp;
 import com.alex.mirash.graph.PeriodUtils;
 import com.alex.mirash.graph.graph.model.GraphModel;
+import com.alex.mirash.graph.graph.model.TimeModel;
 import com.alex.mirash.graph.graph.model.ValueModel;
 import com.alex.mirash.graph.graph.tool.GraphUtils;
 import com.alex.mirash.graph.graph.view.GraphView;
@@ -22,8 +22,7 @@ import java.util.Locale;
 public class GraphController {
     private GraphView graphView;
     private GraphModel graphModel;
-
-    public static GraphParams params = new GraphParams(GraphApp.getInstance().getResources());
+    private GraphParams params;
 
     private AsyncTask task;
 
@@ -31,6 +30,7 @@ public class GraphController {
 
     public GraphController(GraphView graphView) {
         this.graphView = graphView;
+        params = new GraphParams(GraphApp.getInstance().getResources(), new TestParamsProvider(graphView.getResources()));
         graphView.setParams(params);
     }
 
@@ -59,6 +59,8 @@ public class GraphController {
     private GraphModel retrieveGraphData() {
         GraphModel model = generateTestData();
         applyMinMaxValues(model);
+        calculateGraphAttributes(model);
+        calculateTimeLabels(model);
         return model;
     }
 
@@ -74,18 +76,25 @@ public class GraphController {
     private void calculateTimeLabels(GraphModel graphModel) {
         long startTime = graphModel.getStartTime();
         long endTime = graphModel.getFinishTime();
+        Calendar calendar = Calendar.getInstance();
         for (long time = startTime; time <= endTime; time += PeriodUtils.MILLIS_IN_WEEK) {
-
+            calendar.setTimeInMillis(time);
+            String startLabel = dateFormat.format(calendar.getTime());
+            calendar.add(Calendar.DAY_OF_YEAR, 7);
+            calendar.add(Calendar.MILLISECOND, -1);
+            String endLabel = dateFormat.format(calendar.getTime());
+            graphModel.addTimeLabel(new TimeModel(time, time + PeriodUtils.MILLIS_IN_WEEK, startLabel + "\n" + endLabel));
         }
     }
 
     private GraphModel generateTestData() {
-        Log.d("LOL", "generate test data");
         long startTime;
         long finishTime;
 
         Calendar calendar = Calendar.getInstance();
+        PeriodUtils.applyEndOfWeek(calendar);
         finishTime = calendar.getTimeInMillis();
+
         calendar.add(Calendar.MONTH, -3);
         PeriodUtils.applyStartOfMonth(calendar);
         startTime = calendar.getTimeInMillis();
@@ -101,6 +110,12 @@ public class GraphController {
         for (int i = 0; i <= 10; i++) {
             graphModel.addValue(new ValueModel(startTime + PeriodUtils.MILLIS_IN_DAY * i, i * 10));
         }
+        graphModel.addValue(new ValueModel(System.currentTimeMillis(), 50));
+        calendar = Calendar.getInstance();
+        PeriodUtils.applyEndOfWeek(calendar);
+        graphModel.addValue(new ValueModel(calendar.getTimeInMillis(), 50));
+
+        graphModel.setGoalValue(55f);
         return graphModel;
     }
 

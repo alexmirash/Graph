@@ -1,10 +1,7 @@
 package com.alex.mirash.graph.graph.control;
 
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.Paint;
-
-import com.alex.mirash.graph.R;
 
 /**
  * @author Mirash
@@ -28,24 +25,29 @@ public class GraphParams {
 
     private Paint pointLinePaint;
     private Paint goalLinePaint;
+    private Paint gridPaint;
 
-    public GraphParams(Resources res) {
-        pointSize = res.getDimensionPixelSize(R.dimen.graph_point_size);
+    private int valueAxisLabelLayoutId;
+    private int timeAxisLabelLayoutId;
 
-        paddingLeft = res.getDimension(R.dimen.graph_padding_left);
-        paddingRight = res.getDimension(R.dimen.graph_padding_right);
-        paddingTop = res.getDimension(R.dimen.graph_padding_top);
-        paddingBottom = res.getDimension(R.dimen.graph_padding_bottom);
+    public GraphParams(Resources res, GraphParamsProvider paramsProvider) {
+        pointSize = paramsProvider.getPointSize();
 
-        valueAxisLabelsCount = 11;
+        paddingLeft = paramsProvider.getPaddingLeft();
+        paddingRight = paramsProvider.getPaddingRight();
+        paddingTop = paramsProvider.getPaddingTop();
+        paddingBottom = paramsProvider.getPaddingBottom();
 
-        pointLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        pointLinePaint.setStrokeWidth(res.getDimension(R.dimen.graph_line_width));
-        pointLinePaint.setColor(res.getColor(R.color.graph_line_color));
+        valueAxisLabelsCount = paramsProvider.getValueAxisLabelCount();
 
-        goalLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        goalLinePaint.setStrokeWidth(res.getDimension(R.dimen.graph_line_width));
-        goalLinePaint.setColor(Color.CYAN);
+        pointLinePaint = paramsProvider.getPointLinePaint();
+
+        goalLinePaint = paramsProvider.getGoalLinePaint();
+
+        gridPaint = paramsProvider.getGridPaint();
+
+        valueAxisLabelLayoutId = paramsProvider.getValueAxisLabelLayoutId();
+        timeAxisLabelLayoutId = paramsProvider.getTimeAxisLabelLayoutId();
     }
 
     public float getPaddingLeft() {
@@ -64,7 +66,7 @@ public class GraphParams {
         return paddingBottom;
     }
 
-    public int getValueLabelsCount() {
+    public int getValueAxisLabelsCount() {
         return valueAxisLabelsCount;
     }
 
@@ -114,7 +116,19 @@ public class GraphParams {
         return pointLinePaint;
     }
 
-    public Paint getGoalPaint() {
+    public Paint getGoalLinePaint() {
         return goalLinePaint;
+    }
+
+    public Paint getGridPaint() {
+        return gridPaint;
+    }
+
+    public int getValueAxisLabelLayoutId() {
+        return valueAxisLabelLayoutId;
+    }
+
+    public int getTimeAxisLabelLayoutId() {
+        return timeAxisLabelLayoutId;
     }
 }

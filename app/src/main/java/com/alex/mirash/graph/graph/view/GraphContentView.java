@@ -2,15 +2,14 @@ package com.alex.mirash.graph.graph.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.alex.mirash.graph.graph.model.GraphData;
+import com.alex.mirash.graph.graph.model.TimeModel;
 import com.alex.mirash.graph.graph.model.ValueModel;
 import com.alex.mirash.graph.graph.tool.GraphPoint;
 
@@ -44,7 +43,6 @@ public class GraphContentView extends BaseGraphView {
         int height = getMeasuredHeight();
         params.setHeight(height);
         if (graphData != null) {
-            Log.d("LOL", "onMeasure " + params.getWidth() + " " + height);
             setMeasuredDimension((int) params.getWidth(), height);
         }
     }
@@ -52,9 +50,27 @@ public class GraphContentView extends BaseGraphView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.d("LOL", "onDraw " + canvas.getWidth() + " " + canvas.getHeight());
-        canvas.drawColor(Color.WHITE);
         if (graphData != null) {
+            //draw vertical grid
+            for (TimeModel timeModel : graphData.getTimeLabels()) {
+                float x = timeToPosition(graphData, timeModel.getTimeFinish());
+                canvas.drawLine(x, 0, x, canvas.getHeight(), params.getGridPaint());
+            }
+            //draw horizontal grid
+            float step = (graphData.getValueInterval()) / (params.getValueAxisLabelsCount() - 1);
+            float value = graphData.getMinValue();
+            for (int i = 0; i < params.getValueAxisLabelsCount(); i++) {
+                float y = valueToYPosition(graphData, value);
+                value += step;
+                canvas.drawLine(0, y, canvas.getWidth(), y, params.getGridPaint());
+            }
+            //draw goal
+            Float goalValue = graphData.getGoalValue();
+            if (goalValue != null) {
+                float goalY = valueToYPosition(graphData, goalValue);
+                canvas.drawLine(0, goalY, canvas.getWidth(), goalY, params.getGoalLinePaint());
+            }
+            //draw points and lines between them
             List<GraphPoint> pointList = graphData.getPoints();
             for (int i = 0; i < pointList.size() - 1; i++) {
                 GraphPoint point = pointList.get(i);
@@ -82,8 +98,6 @@ public class GraphContentView extends BaseGraphView {
     private void addPoint(ValueModel valueModel) {
         float x = timeToPosition(graphData, valueModel.getTime());
         float y = valueToYPosition(graphData, valueModel.getValue());
-
-        Log.d("LOL", "x, y " + x + "; " + y);
 
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(params.getPointSize(), params.getPointSize());
         lp.leftMargin = (int) (x - params.getHalfPointSize());

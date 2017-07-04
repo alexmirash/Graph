@@ -29,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/graph_time_axis_height"
                 />
-            <com.alex.mirash.graph.graph.view.GraphValueAxisView
+            <com.alex.mirash.graph.graph.view.GraphTimeAxisView
                 android:id="@+id/graph_time_axis"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/graph_time_axis_height"
