@@ -10,7 +10,10 @@ import com.alex.mirash.graph.graph.model.ValueModel;
 import com.alex.mirash.graph.graph.tool.GraphUtils;
 import com.alex.mirash.graph.graph.view.GraphView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * @author Mirash
@@ -23,6 +26,8 @@ public class GraphController {
     public static GraphParams params = new GraphParams(GraphApp.getInstance().getResources());
 
     private AsyncTask task;
+
+    private DateFormat dateFormat = new SimpleDateFormat("yyyy, MMM dd", Locale.getDefault());
 
     public GraphController(GraphView graphView) {
         this.graphView = graphView;
@@ -54,7 +59,6 @@ public class GraphController {
     private GraphModel retrieveGraphData() {
         GraphModel model = generateTestData();
         applyMinMaxValues(model);
-        calculateGraphAttributes(model);
         return model;
     }
 
@@ -65,6 +69,14 @@ public class GraphController {
     private void calculateGraphAttributes(GraphModel graphModel) {
         float width = GraphUtils.timeIntervalToPixels(graphModel.getTimeInterval());
         params.setValueWidth(width);
+    }
+
+    private void calculateTimeLabels(GraphModel graphModel) {
+        long startTime = graphModel.getStartTime();
+        long endTime = graphModel.getFinishTime();
+        for (long time = startTime; time <= endTime; time += PeriodUtils.MILLIS_IN_WEEK) {
+
+        }
     }
 
     private GraphModel generateTestData() {

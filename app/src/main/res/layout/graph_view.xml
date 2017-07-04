@@ -29,6 +29,12 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/graph_time_axis_height"
                 />
+            <com.alex.mirash.graph.graph.view.GraphValueAxisView
+                android:id="@+id/graph_time_axis"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/graph_time_axis_height"
+                android:layout_gravity="bottom"
+                />
         </FrameLayout>
     </HorizontalScrollView>
 </FrameLayout>

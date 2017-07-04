@@ -11,11 +11,13 @@ public class GraphModel extends GraphData {
     public GraphModel() {
         values = new ArrayList<>();
         points = new ArrayList<>();
+        timeLabels = new ArrayList<>();
     }
 
     public GraphModel(int capacity) {
         values = new ArrayList<>(capacity);
         points = new ArrayList<>(capacity);
+        timeLabels = new ArrayList<>(capacity);
     }
 
     public void setMinValue(float minValue) {
@@ -36,6 +38,11 @@ public class GraphModel extends GraphData {
 
     public void addValue(ValueModel valueModel) {
         values.add(valueModel);
+    }
+
+
+    public void addTimeLabel(TimeModel label) {
+        timeLabels.add(label);
     }
 
     public void setTimeInterval(long startTime, long finishTime) {

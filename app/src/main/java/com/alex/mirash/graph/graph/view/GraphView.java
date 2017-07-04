@@ -18,6 +18,7 @@ public class GraphView extends BaseGraphView {
 
     private GraphContentView graphContentView;
     private GraphValueAxisView valueAxisView;
+    private GraphTimeAxisView timeAxisView;
 
     public GraphView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);

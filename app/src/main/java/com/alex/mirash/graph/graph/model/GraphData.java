@@ -17,6 +17,7 @@ public class GraphData {
 
     protected List<ValueModel> values;
     protected List<GraphPoint> points;
+    protected List<TimeModel> timeLabels;
 
     public float getMinValue() {
         return minValue;
@@ -56,5 +57,9 @@ public class GraphData {
 
     public void addPoint(GraphPoint point) {
         points.add(point);
+    }
+
+    public List<TimeModel> getTimeLabels() {
+        return timeLabels;
     }
 }
