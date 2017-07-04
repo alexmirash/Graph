@@ -30,6 +30,7 @@ public class GraphParams {
     private int timeAxisLabelLayoutId;
 
     private float timeIntervalInPixel;
+    private int pointLayoutId;
 
     public GraphParams(GraphParamsProvider paramsProvider) {
         timeIntervalInPixel = paramsProvider.getTimeIntervalInPixel();
@@ -51,6 +52,7 @@ public class GraphParams {
 
         valueAxisLabelLayoutId = paramsProvider.getValueAxisLabelLayoutId();
         timeAxisLabelLayoutId = paramsProvider.getTimeAxisLabelLayoutId();
+        pointLayoutId = paramsProvider.getPointLayoutId();
     }
 
     public float getPaddingLeft() {
@@ -137,5 +139,13 @@ public class GraphParams {
 
     public float getTimeIntervalInPixel() {
         return timeIntervalInPixel;
+    }
+
+    public int getPointLayoutId() {
+        return pointLayoutId;
+    }
+
+    public void setPointLayoutId(int pointLayoutId) {
+        this.pointLayoutId = pointLayoutId;
     }
 }

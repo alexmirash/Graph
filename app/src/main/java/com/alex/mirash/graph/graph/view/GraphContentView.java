@@ -6,6 +6,7 @@ import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.alex.mirash.graph.graph.model.GraphData;
@@ -95,6 +96,10 @@ public class GraphContentView extends BaseGraphView {
         }
     }
 
+    private View createPointView() {
+        return inflate(getContext(), params.getPointLayoutId(), null);
+    }
+
     private void addPoint(ValueModel valueModel) {
         float x = timeToPosition(graphData, valueModel.getTime());
         float y = valueToYPosition(graphData, valueModel.getValue());
@@ -102,7 +107,7 @@ public class GraphContentView extends BaseGraphView {
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(params.getPointSize(), params.getPointSize());
         lp.leftMargin = (int) (x - params.getHalfPointSize());
         lp.topMargin = (int) (y - params.getHalfPointSize());
-        GraphPointView pointView = new GraphPointView(getContext());
+        View pointView = createPointView();
         addView(pointView, lp);
 
         graphData.addPoint(new GraphPoint(x, y));

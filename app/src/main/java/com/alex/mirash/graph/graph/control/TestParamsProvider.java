@@ -65,6 +65,11 @@ public class TestParamsProvider implements GraphParamsProvider {
     }
 
     @Override
+    public int getPointLayoutId() {
+        return R.layout.graph_point_layout_layout;
+    }
+
+    @Override
     public Paint getGridPaint() {
         Paint gridPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         gridPaint.setStrokeWidth(res.getDimension(R.dimen.graph_line_width));

@@ -25,6 +25,8 @@ public interface GraphParamsProvider {
 
     int getTimeAxisLabelLayoutId();
 
+    int getPointLayoutId();
+
     Paint getGridPaint();
 
     Paint getPointLinePaint();
