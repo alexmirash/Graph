@@ -7,7 +7,6 @@ import com.alex.mirash.graph.PeriodUtils;
 import com.alex.mirash.graph.graph.model.GraphModel;
 import com.alex.mirash.graph.graph.model.TimeModel;
 import com.alex.mirash.graph.graph.model.ValueModel;
-import com.alex.mirash.graph.graph.tool.GraphUtils;
 import com.alex.mirash.graph.graph.view.GraphView;
 
 import java.util.Calendar;
@@ -60,7 +59,7 @@ public class GraphController extends GraphBaseController {
     }
 
     private void calculateGraphAttributes(GraphModel graphModel) {
-        float width = GraphUtils.timeIntervalToPixels(graphModel.getTimeInterval());
+        float width = timeIntervalToPixels(graphModel.getTimeInterval());
         params.setValueWidth(width);
     }
 

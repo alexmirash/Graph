@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.alex.mirash.graph.PeriodUtils;
 import com.alex.mirash.graph.R;
 
 /**
@@ -15,6 +16,12 @@ public class TestParamsProvider implements GraphParamsProvider {
 
     public TestParamsProvider(Resources resources) {
         res = resources;
+    }
+
+    @Override
+    public float getTimeIntervalInPixel() {
+        return PeriodUtils.MILLIS_IN_WEEK /
+                res.getDimension(R.dimen.graph_pixels_in_week_period_week);
     }
 
     @Override

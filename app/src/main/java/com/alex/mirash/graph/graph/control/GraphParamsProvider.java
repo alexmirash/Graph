@@ -7,6 +7,8 @@ import android.graphics.Paint;
  */
 
 public interface GraphParamsProvider {
+    float getTimeIntervalInPixel();
+
     float getPaddingTop();
 
     float getPaddingBottom();

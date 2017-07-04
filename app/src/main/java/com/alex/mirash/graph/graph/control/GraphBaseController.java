@@ -48,4 +48,8 @@ public abstract class GraphBaseController {
         });
     }
 
+    protected float timeIntervalToPixels(long timeInterval) {
+        return timeInterval / params.getTimeIntervalInPixel();
+    }
+
 }
