@@ -1,8 +1,8 @@
 package com.alex.mirash.graph.graph.control;
 
+import android.content.res.Resources;
 import android.os.AsyncTask;
 
-import com.alex.mirash.graph.GraphApp;
 import com.alex.mirash.graph.PeriodUtils;
 import com.alex.mirash.graph.graph.model.GraphModel;
 import com.alex.mirash.graph.graph.model.TimeModel;
@@ -10,30 +10,25 @@ import com.alex.mirash.graph.graph.model.ValueModel;
 import com.alex.mirash.graph.graph.tool.GraphUtils;
 import com.alex.mirash.graph.graph.view.GraphView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 /**
  * @author Mirash
  */
 
-public class GraphController {
-    private GraphView graphView;
-    private GraphModel graphModel;
-    private GraphParams params;
-
+public class GraphController extends GraphBaseController {
     private AsyncTask task;
 
-    private DateFormat dateFormat = new SimpleDateFormat("yyyy, MMM dd", Locale.getDefault());
-
     public GraphController(GraphView graphView) {
-        this.graphView = graphView;
-        params = new GraphParams(GraphApp.getInstance().getResources(), new TestParamsProvider(graphView.getResources()));
-        graphView.setParams(params);
+        super(graphView);
     }
 
+    @Override
+    protected GraphParamsProvider provideParams(Resources res) {
+        return new TestParamsProvider(res);
+    }
+
+    @Override
     public void updateGraph() {
         task = new AsyncTask<Void, Void, GraphModel>() {
 
@@ -46,17 +41,13 @@ public class GraphController {
             protected void onPostExecute(GraphModel model) {
                 task = null;
                 graphModel = model;
-                graphView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        graphView.update(graphModel);
-                    }
-                });
+                updateGraphView();
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
-    private GraphModel retrieveGraphData() {
+    @Override
+    protected GraphModel retrieveGraphData() {
         GraphModel model = generateTestData();
         applyMinMaxValues(model);
         calculateGraphAttributes(model);
@@ -102,11 +93,6 @@ public class GraphController {
         GraphModel graphModel = new GraphModel();
         graphModel.setTimeInterval(startTime, finishTime);
 
- /*       int i = 0;
-     for (long time = startTime + PeriodUtils.MILLIS_IN_HOUR * 12; time < finishTime; time += PeriodUtils.MILLIS_IN_DAY) {
-            graphModel.addValue(new ValueModel(time, i));
-            i++;
-        }*/
         for (int i = 0; i <= 10; i++) {
             graphModel.addValue(new ValueModel(startTime + PeriodUtils.MILLIS_IN_DAY * i, i * 10));
         }

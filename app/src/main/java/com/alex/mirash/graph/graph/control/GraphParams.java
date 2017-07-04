@@ -1,6 +1,5 @@
 package com.alex.mirash.graph.graph.control;
 
-import android.content.res.Resources;
 import android.graphics.Paint;
 
 /**
@@ -30,7 +29,7 @@ public class GraphParams {
     private int valueAxisLabelLayoutId;
     private int timeAxisLabelLayoutId;
 
-    public GraphParams(Resources res, GraphParamsProvider paramsProvider) {
+    public GraphParams(GraphParamsProvider paramsProvider) {
         pointSize = paramsProvider.getPointSize();
 
         paddingLeft = paramsProvider.getPaddingLeft();
